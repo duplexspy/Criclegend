@@ -154,11 +154,86 @@ export function Fantasy() {
             </Card>
           </div>
         </TabsContent>
-        <TabsContent value="analysis">
-           <div className="p-8 text-center text-muted-foreground mt-4 border border-border border-dashed rounded-xl">Pitch & Weather Analysis Engine generating data...</div>
+        <TabsContent value="analysis" className="space-y-6 pt-4">
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+             <Card className="bg-card border-border">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center gap-2 text-white">
+                    <Zap className="w-5 h-5 text-electric-blue" />
+                    Pitch Behavior
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="grid grid-cols-2 gap-4 text-center">
+                     <div className="bg-white/5 p-4 rounded-xl border border-border/50">
+                        <div className="text-3xl font-bold text-white mb-1">Batting</div>
+                        <div className="text-xs text-muted-foreground uppercase tracking-wider">Advantage</div>
+                     </div>
+                     <div className="bg-white/5 p-4 rounded-xl border border-border/50">
+                        <div className="text-3xl font-bold text-primary mb-1">Pace</div>
+                        <div className="text-xs text-muted-foreground uppercase tracking-wider">Bowling Type</div>
+                     </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between text-xs mb-2">
+                       <span className="text-white font-medium">Pace (65%)</span>
+                       <span className="text-white font-medium">Spin (35%)</span>
+                    </div>
+                    <div className="h-2 w-full bg-secondary overflow-hidden rounded-full flex">
+                       <div className="h-full bg-electric-blue" style={{ width: '65%' }} />
+                       <div className="h-full bg-orange-glow" style={{ width: '35%' }} />
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground">Historical data at The Gabba indicates extra bounce for fast bowlers. Spinners average 42.5 runs per wicket here.</p>
+                </CardContent>
+             </Card>
+
+             <Card className="bg-card border-border">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center gap-2 text-white">
+                    <Bolt className="w-5 h-5 text-primary" />
+                    Weather Impact
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="flex items-center gap-6">
+                     <div className="text-5xl font-bold text-white drop-shadow-lg">24°</div>
+                     <div className="space-y-1">
+                        <div className="text-sm font-bold text-white">Mostly Clear</div>
+                        <div className="text-xs text-muted-foreground">Humidity: 68% • Wind: 15km/h</div>
+                     </div>
+                  </div>
+                  <div className="p-4 bg-orange-glow/10 border border-orange-glow/20 rounded-xl">
+                     <h4 className="text-sm font-bold text-orange-glow mb-1">AI Match Alert</h4>
+                     <p className="text-xs text-white/80">Dew is expected in the second innings. Chasing teams win 60% of matches under these specific conditions. Pick middle-order batters from the chasing team.</p>
+                  </div>
+                </CardContent>
+             </Card>
+           </div>
         </TabsContent>
-        <TabsContent value="differentials">
-           <div className="p-8 text-center text-muted-foreground mt-4 border border-border border-dashed rounded-xl">AI Differential Picks Engine calculating probabilities...</div>
+        <TabsContent value="differentials" className="space-y-4 pt-4">
+           {[{ name: "Rishabh Pant", role: "WK-BAT", sel: "12%", expected: "75+", reason: "Excellent record against Pat Cummins. Usually promoted against leg-spinners like Zampa." },
+             { name: "Marnus Labuschagne", role: "BAT", sel: "18%", expected: "60+", reason: "Anchors innings well when early wickets fall. Very low selection makes him a prime differential." },
+             { name: "Naseem Shah", role: "BOWL", sel: "8%", expected: "50+", reason: "Takes wickets in powerplay under lights. His outswing will be highly effective against top order." }
+           ].map((diff, i) => (
+             <Card key={i} className="bg-card border-border hover:border-primary/50 transition-colors">
+               <CardContent className="p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                  <div className="shrink-0 w-16 h-16 rounded-full bg-neutral-900 border border-primary/30 flex items-center justify-center font-bold text-xl text-primary shadow-[0_0_15px_rgba(var(--primary),0.2)]">
+                     {diff.sel}
+                  </div>
+                  <div className="flex-1 space-y-2">
+                     <div className="flex items-center gap-2">
+                        <h3 className="font-bold text-lg text-white leading-none">{diff.name}</h3>
+                        <Badge variant="outline" className="text-[10px] uppercase h-5 px-1.5">{diff.role}</Badge>
+                     </div>
+                     <p className="text-xs text-muted-foreground">Expected Fantasy Points: <strong className="text-white">{diff.expected}</strong></p>
+                     <p className="text-sm text-electric-blue/90 mt-2 italic flex items-start gap-2">
+                       <Zap className="w-4 h-4 shrink-0 mt-0.5" /> {diff.reason}
+                     </p>
+                  </div>
+               </CardContent>
+             </Card>
+           ))}
         </TabsContent>
       </Tabs>
       
