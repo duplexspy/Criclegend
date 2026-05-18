@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -31,6 +32,9 @@ const FIELDING_CAREER = [
 ];
 
 export function Profile() {
+  const { id } = useParams();
+  const playerName = id ? decodeURIComponent(id) : "Virat Kohli";
+
   return (
     <div className="p-4 md:p-8 space-y-6 max-w-5xl mx-auto">
       
@@ -45,7 +49,7 @@ export function Profile() {
             
             <div className="flex-1 space-y-3">
                <div className="flex flex-col md:flex-row md:items-center gap-3">
-                  <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white">Virat Kohli</h1>
+                  <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white">{playerName}</h1>
                   <Badge variant="outline" className="w-fit mx-auto md:mx-0 border-electric-blue text-electric-blue">Right Hand Bat</Badge>
                </div>
                <p className="text-muted-foreground font-medium flex items-center justify-center md:justify-start gap-2">

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -33,6 +34,8 @@ const BOWLING_STATS = [
 ];
 
 export function Matches() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col h-full bg-background">
       
@@ -110,7 +113,12 @@ export function Matches() {
                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />
                        <div className="flex items-center gap-2 text-white">
                           <Zap className="w-4 h-4 text-primary fill-primary" />
-                          <span className="font-semibold">Mohammad Rizwan</span>
+                          <span 
+                            className="font-semibold cursor-pointer hover:underline"
+                            onClick={() => navigate(`/profile/Mohammad%20Rizwan`)}
+                          >
+                            Mohammad Rizwan
+                          </span>
                        </div>
                        <div className="text-right">
                           <span className="font-mono font-bold text-lg text-primary mr-2">78</span>
@@ -120,7 +128,12 @@ export function Matches() {
                     <div className="flex justify-between items-center px-3 py-2 text-white/70">
                        <div className="flex items-center gap-2">
                           <span className="w-4" /> {/* Spacer */}
-                          <span className="font-medium">Tim David</span>
+                          <span 
+                            className="font-medium cursor-pointer hover:underline"
+                            onClick={() => navigate(`/profile/Tim%20David`)}
+                          >
+                            Tim David
+                          </span>
                        </div>
                        <div className="text-right">
                           <span className="font-mono font-bold text-base mr-2">12</span>
@@ -135,7 +148,12 @@ export function Matches() {
                     <div className="flex justify-between items-center bg-white/5 p-3 rounded-lg border border-border">
                        <div className="flex items-center gap-2 text-white">
                           <Activity className="w-4 h-4 text-electric-blue" />
-                          <span className="font-semibold">Shaheen Afridi</span>
+                          <span 
+                            className="font-semibold cursor-pointer hover:underline"
+                            onClick={() => navigate(`/profile/Shaheen%20Afridi`)}
+                          >
+                            Shaheen Afridi
+                          </span>
                        </div>
                        <div className="text-right">
                           <span className="font-mono font-bold text-lg text-white mr-2">2-24</span>
@@ -250,8 +268,13 @@ export function Matches() {
                       <tbody className="divide-y divide-border/50">
                          {BATTING_STATS.map((b, i) => (
                            <tr key={i} className={`hover:bg-white/5 transition-colors ${b.highlight ? 'bg-primary/5' : ''}`}>
-                              <td className="px-4 py-3">
-                                 <div className={`font-bold whitespace-nowrap ${b.highlight ? 'text-primary' : 'text-white'}`}>{b.name}</div>
+                               <td className="px-4 py-3">
+                                 <div 
+                                    className={`font-bold whitespace-nowrap cursor-pointer hover:underline ${b.highlight ? 'text-primary' : 'text-white'}`}
+                                    onClick={() => navigate(`/profile/${encodeURIComponent(b.name)}`)}
+                                 >
+                                    {b.name}
+                                 </div>
                                  <div className="text-xs text-muted-foreground truncate max-w-[150px] md:max-w-none">{b.desc}</div>
                               </td>
                               <td className={`px-4 py-3 text-right font-mono ${b.highlight ? 'font-bold text-primary' : 'text-white'}`}>{b.runs}</td>
@@ -282,7 +305,12 @@ export function Matches() {
                       <tbody className="divide-y divide-border/50">
                          {BOWLING_STATS.map((b, i) => (
                            <tr key={i} className={`hover:bg-white/5 transition-colors ${b.highlight ? 'bg-primary/5' : ''}`}>
-                              <td className="px-4 py-3 font-bold text-white whitespace-nowrap">{b.name}</td>
+                              <td 
+                                 className="px-4 py-3 font-bold text-white whitespace-nowrap cursor-pointer hover:underline"
+                                 onClick={() => navigate(`/profile/${encodeURIComponent(b.name)}`)}
+                              >
+                                 {b.name}
+                              </td>
                               <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.overs}</td>
                               <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.maidens}</td>
                               <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.runs}</td>
@@ -302,23 +330,23 @@ export function Matches() {
                <div className="p-4 space-y-3">
                  <div className="flex gap-2 text-sm items-center flex-wrap">
                    <span className="font-bold text-white whitespace-nowrap">27-1</span>
-                   <span className="text-muted-foreground text-xs whitespace-nowrap">(Fakhar Zaman, 3.2 ov)</span>
+                   <span className="text-muted-foreground text-xs whitespace-nowrap">(<span className="cursor-pointer hover:underline hover:text-white" onClick={() => navigate('/profile/Fakhar%20Zaman')}>Fakhar Zaman</span>, 3.2 ov)</span>
                    <span className="text-border mx-1">|</span>
                    
                    <span className="font-bold text-white whitespace-nowrap">42-2</span>
-                   <span className="text-muted-foreground text-xs whitespace-nowrap">(Mirza Baig, 6.1 ov)</span>
+                   <span className="text-muted-foreground text-xs whitespace-nowrap">(<span className="cursor-pointer hover:underline hover:text-white" onClick={() => navigate('/profile/Mirza%20Baig')}>Mirza Baig</span>, 6.1 ov)</span>
                    <span className="text-border mx-1">|</span>
 
                    <span className="font-bold text-white whitespace-nowrap">105-3</span>
-                   <span className="text-muted-foreground text-xs whitespace-nowrap">(Sikandar Raza, 11.4 ov)</span>
+                   <span className="text-muted-foreground text-xs whitespace-nowrap">(<span className="cursor-pointer hover:underline hover:text-white" onClick={() => navigate('/profile/Sikandar%20Raza')}>Sikandar Raza</span>, 11.4 ov)</span>
                    <span className="text-border mx-1">|</span>
 
                    <span className="font-bold text-white whitespace-nowrap">125-4</span>
-                   <span className="text-muted-foreground text-xs whitespace-nowrap">(David Wiese, 13.5 ov)</span>
+                   <span className="text-muted-foreground text-xs whitespace-nowrap">(<span className="cursor-pointer hover:underline hover:text-white" onClick={() => navigate('/profile/David%20Wiese')}>David Wiese</span>, 13.5 ov)</span>
                    <span className="text-border mx-1">|</span>
                    
                    <span className="font-bold text-primary whitespace-nowrap">168-5</span>
-                   <span className="text-muted-foreground text-xs whitespace-nowrap">(Mohammad Rizwan, 16.3 ov)</span>
+                   <span className="text-muted-foreground text-xs whitespace-nowrap">(<span className="cursor-pointer hover:underline hover:text-white" onClick={() => navigate('/profile/Mohammad%20Rizwan')}>Mohammad Rizwan</span>, 16.3 ov)</span>
                  </div>
                </div>
              </Card>
@@ -430,10 +458,15 @@ export function Matches() {
                       <span className="font-bold text-white">LQ Team</span>
                       <Badge className="bg-primary hover:bg-primary text-black">Batting</Badge>
                    </div>
-                   <div className="p-2 divide-y divide-border/20">
+                     <div className="p-2 divide-y divide-border/20">
                      {["Fakhar Zaman", "Mirza Baig", "Mohammad Rizwan (c)(wk)", "Sikandar Raza", "Tim David", "David Wiese", "Rashid Khan", "Shaheen Afridi", "Haris Rauf", "Zaman Khan"].map((p,i) => (
                        <div key={i} className="px-4 py-3 hover:bg-white/5 rounded-lg flex items-center justify-between text-sm transition-colors">
-                         <span className="text-white font-medium">{p}</span>
+                         <span 
+                           className="text-white font-medium cursor-pointer hover:underline"
+                           onClick={() => navigate(`/profile/${encodeURIComponent(p.replace(/ \(c\)| \(wk\)/g, ""))}`)}
+                         >
+                           {p}
+                         </span>
                          {i < 5 ? <span className="text-xs text-muted-foreground border border-border/50 px-2 py-0.5 rounded">BAT</span> : <span className="text-xs text-muted-foreground border border-border/50 px-2 py-0.5 rounded">BOWL</span>}
                        </div>
                      ))}
@@ -447,7 +480,12 @@ export function Matches() {
                    <div className="p-2 divide-y divide-border/20">
                      {["Shan Masood (c)", "Usman Khan (wk)", "Johnson Charles", "Iftikhar Ahmed", "Khushdil Shah", "David Willey", "Usama Mir", "A Zampa", "M Starc", "P Cummins"].map((p,i) => (
                        <div key={i} className="px-4 py-3 hover:bg-white/5 rounded-lg flex items-center justify-between text-sm transition-colors">
-                         <span className="text-white font-medium">{p}</span>
+                         <span 
+                           className="text-white font-medium cursor-pointer hover:underline"
+                           onClick={() => navigate(`/profile/${encodeURIComponent(p.replace(/ \(c\)| \(wk\)/g, ""))}`)}
+                         >
+                           {p}
+                         </span>
                          {i < 5 ? <span className="text-xs text-muted-foreground border border-border/50 px-2 py-0.5 rounded">BAT</span> : <span className="text-xs text-muted-foreground border border-border/50 px-2 py-0.5 rounded">BOWL</span>}
                        </div>
                      ))}
