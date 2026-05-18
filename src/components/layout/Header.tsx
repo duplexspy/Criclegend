@@ -62,7 +62,7 @@ export function Header() {
                   <div className="space-y-1">
                     {searchResults.map((result, i) => (
                       <Link 
-                        to={result.type === 'player' ? '/profile' : '/matches'} 
+                        to={result.type === 'player' ? `/profile/${encodeURIComponent(result.label)}` : '/matches'} 
                         key={i} 
                         onClick={() => setIsSearchOpen(false)}
                         className="flex items-center justify-between p-3 rounded-lg hover:bg-white/10 transition-colors"
@@ -127,7 +127,7 @@ export function Header() {
                   <div className="space-y-2">
                     {searchResults.map((result, i) => (
                       <Link 
-                        to={result.type === 'player' ? '/profile' : '/matches'} 
+                        to={result.type === 'player' ? `/profile/${encodeURIComponent(result.label)}` : '/matches'} 
                         key={i} 
                         onClick={() => setIsSearchOpen(false)}
                         className="flex items-center justify-between p-3 rounded-xl bg-card border border-border"

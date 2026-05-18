@@ -16,6 +16,7 @@ export default function App() {
           <Route path="fantasy" element={<Fantasy />} />
           <Route path="news" element={<News />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="profile/:id" element={<Profile />} />
         </Route>
       </Routes>
     </Router>
