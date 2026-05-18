@@ -294,9 +294,87 @@ export function Matches() {
                    </table>
                 </div>
              </Card>
+
+             <Card className="bg-card border-border overflow-hidden">
+               <div className="bg-white/5 p-4 border-b border-border flex justify-between items-center">
+                 <h3 className="font-bold text-white uppercase tracking-wider text-sm">Fall of Wickets</h3>
+               </div>
+               <div className="p-4 space-y-3">
+                 <div className="flex gap-2 text-sm items-center flex-wrap">
+                   <span className="font-bold text-white whitespace-nowrap">27-1</span>
+                   <span className="text-muted-foreground text-xs whitespace-nowrap">(Fakhar Zaman, 3.2 ov)</span>
+                   <span className="text-border mx-1">|</span>
+                   
+                   <span className="font-bold text-white whitespace-nowrap">42-2</span>
+                   <span className="text-muted-foreground text-xs whitespace-nowrap">(Mirza Baig, 6.1 ov)</span>
+                   <span className="text-border mx-1">|</span>
+
+                   <span className="font-bold text-white whitespace-nowrap">105-3</span>
+                   <span className="text-muted-foreground text-xs whitespace-nowrap">(Sikandar Raza, 11.4 ov)</span>
+                   <span className="text-border mx-1">|</span>
+
+                   <span className="font-bold text-white whitespace-nowrap">125-4</span>
+                   <span className="text-muted-foreground text-xs whitespace-nowrap">(David Wiese, 13.5 ov)</span>
+                   <span className="text-border mx-1">|</span>
+                   
+                   <span className="font-bold text-primary whitespace-nowrap">168-5</span>
+                   <span className="text-muted-foreground text-xs whitespace-nowrap">(Mohammad Rizwan, 16.3 ov)</span>
+                 </div>
+               </div>
+             </Card>
           </TabsContent>
 
           <TabsContent value="graphs" className="pt-4 space-y-6">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="bg-card border-border">
+                   <CardContent className="p-6">
+                      <h3 className="font-bold text-white mb-4">Runs by Zone (Wagon Wheel Mock)</h3>
+                      <div className="space-y-4">
+                         <div>
+                            <div className="flex justify-between text-xs mb-1"><span className="text-white">Cover / Off Side</span> <span className="font-mono text-primary font-bold">42% (77 runs)</span></div>
+                            <Progress value={42} className="h-2 bg-white/10 [&>div]:bg-primary" />
+                         </div>
+                         <div>
+                            <div className="flex justify-between text-xs mb-1"><span className="text-white">Fine Leg / Square Leg</span> <span className="font-mono text-electric-blue font-bold">35% (65 runs)</span></div>
+                            <Progress value={35} className="h-2 bg-white/10 [&>div]:bg-electric-blue" />
+                         </div>
+                         <div>
+                            <div className="flex justify-between text-xs mb-1"><span className="text-white">Straight / V</span> <span className="font-mono text-white/70 font-bold">23% (43 runs)</span></div>
+                            <Progress value={23} className="h-2 bg-white/10 [&>div]:bg-white/70" />
+                         </div>
+                      </div>
+                   </CardContent>
+                </Card>
+
+                <Card className="bg-card border-border">
+                   <CardContent className="p-6">
+                      <h3 className="font-bold text-white mb-4">Pitch Map Analysis (Pace)</h3>
+                      <div className="relative aspect-[3/4] max-w-[200px] mx-auto bg-green-900/30 border-2 border-white/10 rounded overflow-hidden">
+                         {/* Crease lines mock */}
+                         <div className="absolute top-[20%] left-[10%] right-[10%] h-[1px] bg-white/30" />
+                         <div className="absolute top-[80%] left-[10%] right-[10%] h-[1px] bg-white/30" />
+                         <div className="absolute top-[20%] bottom-[80%] left-[25%] right-[25%] border-x border-white/30" />
+                         
+                         {/* Pitch dots representing balls */}
+                         <div className="absolute top-[30%] left-[45%] w-2 h-2 rounded-full bg-electric-blue animate-pulse-slow shadow-[0_0_8px_rgba(var(--electric-blue),0.8)]" />
+                         <div className="absolute top-[35%] left-[55%] w-2 h-2 rounded-full bg-electric-blue shadow-[0_0_8px_rgba(var(--electric-blue),0.8)]" />
+                         <div className="absolute top-[45%] left-[40%] w-2 h-2 rounded-full bg-electric-blue shadow-[0_0_8px_rgba(var(--electric-blue),0.8)]" />
+                         
+                         <div className="absolute top-[60%] left-[60%] w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(var(--primary),0.8)]" />
+                         <div className="absolute top-[65%] left-[50%] w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(var(--primary),0.8)]" />
+                         
+                         <div className="absolute top-[85%] left-[48%] w-2 h-2 rounded-full bg-destructive shadow-[0_0_8px_rgba(var(--destructive),0.8)]" />
+                         <div className="absolute top-[88%] left-[52%] w-2 h-2 rounded-full bg-destructive shadow-[0_0_8px_rgba(var(--destructive),0.8)]" />
+                      </div>
+                      <div className="flex gap-3 justify-center mt-4 text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
+                         <div className="flex items-center gap-1"><div className="w-2 h-2 bg-electric-blue rounded-full" /> Short</div>
+                         <div className="flex items-center gap-1"><div className="w-2 h-2 bg-primary rounded-full" /> Good</div>
+                         <div className="flex items-center gap-1"><div className="w-2 h-2 bg-destructive rounded-full" /> Full</div>
+                      </div>
+                   </CardContent>
+                </Card>
+             </div>
+
              <Card className="bg-card border-border">
                 <CardContent className="p-6">
                    <h3 className="font-bold text-white mb-6">Manhattan (Runs per Over)</h3>

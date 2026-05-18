@@ -12,6 +12,24 @@ const FORM_DATA = [
   { match: "v PAK", runs: 89 },
 ];
 
+const BATTING_CAREER = [
+  { format: "TEST", m: 113, inn: 191, no: 11, runs: 8848, hs: "254*", avg: 49.15, sr: 55.56, "100s": 29, "50s": 30 },
+  { format: "ODI", m: 292, inn: 280, no: 44, runs: 13848, hs: "183", avg: 58.67, sr: 93.62, "100s": 50, "50s": 72 },
+  { format: "T20I", m: 117, inn: 109, no: 31, runs: 4008, hs: "122*", avg: 51.75, sr: 137.96, "100s": 1, "50s": 37 },
+];
+
+const BOWLING_CAREER = [
+  { format: "TEST", m: 113, inn: 11, balls: 175, runs: 84, wkts: 0, bbi: "-", avg: "-", econ: 2.88, sr: "-" },
+  { format: "ODI", m: 292, inn: 50, balls: 662, runs: 671, wkts: 5, bbi: "1/15", avg: 134.2, econ: 6.08, sr: 132.4 },
+  { format: "T20I", m: 117, inn: 13, balls: 152, runs: 204, wkts: 4, bbi: "1/13", avg: 51.0, econ: 8.05, sr: 38.0 },
+];
+
+const FIELDING_CAREER = [
+  { format: "TEST", m: 113, cat: 111, max_cat: 3, mcd: 0, ro: 5 },
+  { format: "ODI", m: 292, cat: 151, max_cat: 3, mcd: 0, ro: 22 },
+  { format: "T20I", m: 117, cat: 54, max_cat: 3, mcd: 0, ro: 9 },
+];
+
 export function Profile() {
   return (
     <div className="p-4 md:p-8 space-y-6 max-w-5xl mx-auto">
@@ -59,35 +77,118 @@ export function Profile() {
             <TabsTrigger value="analysis">AI Analysis</TabsTrigger>
          </TabsList>
 
-         <TabsContent value="stats" className="pt-4">
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {['Tests', 'ODIs', 'T20Is'].map((format, i) => (
-                <Card key={format} className="bg-card border-border">
-                  <div className={`h-1 w-full bg-gradient-to-r ${i === 0 ? 'from-red-500 to-red-400' : 'from-electric-blue to-blue-400'}`} />
-                  <CardContent className="p-5">
-                    <h3 className="font-bold text-lg mb-4 text-white">{format}</h3>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <div className="text-xs text-muted-foreground uppercase tracking-wider">Matches</div>
-                        <div className="font-mono font-bold text-lg">{i === 0 ? '113' : i === 1 ? '292' : '117'}</div>
-                      </div>
-                      <div>
-                        <div className="text-xs text-muted-foreground uppercase tracking-wider">Runs</div>
-                        <div className="font-mono font-bold text-lg text-primary">{i === 0 ? '8848' : i === 1 ? '13848' : '4008'}</div>
-                      </div>
-                      <div>
-                        <div className="text-xs text-muted-foreground uppercase tracking-wider">Average</div>
-                        <div className="font-mono font-bold text-lg">{i === 0 ? '49.15' : i === 1 ? '58.67' : '51.75'}</div>
-                      </div>
-                      <div>
-                        <div className="text-xs text-muted-foreground uppercase tracking-wider">Strike Rate</div>
-                        <div className="font-mono font-bold text-lg">{i === 0 ? '55.56' : i === 1 ? '93.62' : '137.96'}</div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-           </div>
+         <TabsContent value="stats" className="pt-4 space-y-6">
+           <Card className="bg-card border-border overflow-hidden">
+             <div className="bg-white/5 p-4 border-b border-border flex justify-between items-center">
+                <h3 className="font-bold text-white uppercase tracking-wider text-sm">Batting Career</h3>
+             </div>
+             <div className="overflow-x-auto">
+                <table className="w-full text-sm text-left">
+                   <thead className="text-xs text-muted-foreground uppercase bg-white/5 whitespace-nowrap">
+                      <tr>
+                         <th className="px-4 py-3 font-semibold">Format</th>
+                         <th className="px-4 py-3 text-right font-semibold">M</th>
+                         <th className="px-4 py-3 text-right font-semibold">Inn</th>
+                         <th className="px-4 py-3 text-right font-semibold">NO</th>
+                         <th className="px-4 py-3 text-right font-semibold">Runs</th>
+                         <th className="px-4 py-3 text-right font-semibold">HS</th>
+                         <th className="px-4 py-3 text-right font-semibold">Avg</th>
+                         <th className="px-4 py-3 text-right font-semibold">SR</th>
+                         <th className="px-4 py-3 text-right font-semibold">100s</th>
+                         <th className="px-4 py-3 text-right font-semibold">50s</th>
+                      </tr>
+                   </thead>
+                   <tbody className="divide-y divide-border/50">
+                      {BATTING_CAREER.map((b, i) => (
+                        <tr key={i} className="hover:bg-white/5 transition-colors">
+                           <td className="px-4 py-3 font-bold text-white">{b.format}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.m}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.inn}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.no}</td>
+                           <td className="px-4 py-3 text-right font-mono font-bold text-primary">{b.runs}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.hs}</td>
+                           <td className="px-4 py-3 text-right font-mono text-white">{b.avg}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.sr}</td>
+                           <td className="px-4 py-3 text-right font-mono text-white">{b['100s']}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b['50s']}</td>
+                        </tr>
+                      ))}
+                   </tbody>
+                </table>
+             </div>
+           </Card>
+
+           <Card className="bg-card border-border overflow-hidden">
+             <div className="bg-white/5 p-4 border-b border-border flex justify-between items-center">
+                <h3 className="font-bold text-white uppercase tracking-wider text-sm">Bowling Career</h3>
+             </div>
+             <div className="overflow-x-auto">
+                <table className="w-full text-sm text-left">
+                   <thead className="text-xs text-muted-foreground uppercase bg-white/5 whitespace-nowrap">
+                      <tr>
+                         <th className="px-4 py-3 font-semibold">Format</th>
+                         <th className="px-4 py-3 text-right font-semibold">M</th>
+                         <th className="px-4 py-3 text-right font-semibold">Inn</th>
+                         <th className="px-4 py-3 text-right font-semibold">Balls</th>
+                         <th className="px-4 py-3 text-right font-semibold">Runs</th>
+                         <th className="px-4 py-3 text-right font-semibold">Wkts</th>
+                         <th className="px-4 py-3 text-right font-semibold">BBI</th>
+                         <th className="px-4 py-3 text-right font-semibold">Avg</th>
+                         <th className="px-4 py-3 text-right font-semibold">Econ</th>
+                         <th className="px-4 py-3 text-right font-semibold">SR</th>
+                      </tr>
+                   </thead>
+                   <tbody className="divide-y divide-border/50">
+                      {BOWLING_CAREER.map((b, i) => (
+                        <tr key={i} className="hover:bg-white/5 transition-colors">
+                           <td className="px-4 py-3 font-bold text-white">{b.format}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.m}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.inn}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.balls}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.runs}</td>
+                           <td className="px-4 py-3 text-right font-mono font-bold text-electric-blue">{b.wkts}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.bbi}</td>
+                           <td className="px-4 py-3 text-right font-mono text-white">{b.avg}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.econ}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.sr}</td>
+                        </tr>
+                      ))}
+                   </tbody>
+                </table>
+             </div>
+           </Card>
+
+           <Card className="bg-card border-border overflow-hidden">
+             <div className="bg-white/5 p-4 border-b border-border flex justify-between items-center">
+                <h3 className="font-bold text-white uppercase tracking-wider text-sm">Fielding Career</h3>
+             </div>
+             <div className="overflow-x-auto">
+                <table className="w-full text-sm text-left">
+                   <thead className="text-xs text-muted-foreground uppercase bg-white/5 whitespace-nowrap">
+                      <tr>
+                         <th className="px-4 py-3 font-semibold">Format</th>
+                         <th className="px-4 py-3 text-right font-semibold">M</th>
+                         <th className="px-4 py-3 text-right font-semibold">Catches</th>
+                         <th className="px-4 py-3 text-right font-semibold">Max Catches</th>
+                         <th className="px-4 py-3 text-right font-semibold">Missed</th>
+                         <th className="px-4 py-3 text-right font-semibold">Run Outs</th>
+                      </tr>
+                   </thead>
+                   <tbody className="divide-y divide-border/50">
+                      {FIELDING_CAREER.map((b, i) => (
+                        <tr key={i} className="hover:bg-white/5 transition-colors">
+                           <td className="px-4 py-3 font-bold text-white">{b.format}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.m}</td>
+                           <td className="px-4 py-3 text-right font-mono font-bold text-orange-glow">{b.cat}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.max_cat}</td>
+                           <td className="px-4 py-3 text-right font-mono text-white">{b.mcd}</td>
+                           <td className="px-4 py-3 text-right font-mono text-muted-foreground">{b.ro}</td>
+                        </tr>
+                      ))}
+                   </tbody>
+                </table>
+             </div>
+           </Card>
          </TabsContent>
 
          <TabsContent value="recent" className="pt-4">
