@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Activity, Star, TrendingUp, Target } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, Area, AreaChart } from "recharts";
+import { REAL_PLAYERS } from "../lib/playerData";
 
 const FORM_DATA = [
   { match: "v IND", runs: 45 },
@@ -34,6 +35,10 @@ const FIELDING_CAREER = [
 export function Profile() {
   const { id } = useParams();
   const playerName = id ? decodeURIComponent(id) : "Virat Kohli";
+  
+  // Try to find the player from our live dataset
+  const playerRecord = REAL_PLAYERS.find(p => p.title.toLowerCase() === playerName.toLowerCase());
+  const imageUrl = playerRecord?.image || "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&q=80&w=300";
 
   return (
     <div className="p-4 md:p-8 space-y-6 max-w-5xl mx-auto">
@@ -44,7 +49,7 @@ export function Profile() {
          
          <div className="relative z-10 flex flex-col md:flex-row items-center md:items-end gap-6 text-center md:text-left">
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl bg-neutral-800 border-[3px] border-primary overflow-hidden shadow-[0_0_20px_rgba(var(--primary),0.2)]">
-               <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&q=80&w=300" alt="Player" className="w-full h-full object-cover opacity-80" />
+               <img src={imageUrl} alt={playerName} className="w-full h-full object-cover opacity-80" referrerPolicy="no-referrer" />
             </div>
             
             <div className="flex-1 space-y-3">

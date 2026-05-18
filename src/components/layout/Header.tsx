@@ -3,6 +3,7 @@ import { Bell, Search, X, User, Trophy, Calendar, ChevronRight } from "lucide-re
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
+import { REAL_PLAYERS } from "../../lib/playerData";
 
 export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -20,15 +21,26 @@ export function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const searchResults = [
-    { type: "player", label: "Virat Kohli", sub: "India • Batter", icon: User },
-    { type: "player", label: "Rishabh Pant", sub: "India • WK-Batter", icon: User },
-    { type: "player", label: "Steve Smith", sub: "Australia • Batter", icon: User },
+  // Map real players to search results
+  const playerResults = REAL_PLAYERS
+    .filter(p => p.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    .slice(0, 4)
+    .map(p => ({
+       type: "player",
+       label: p.title,
+       sub: "India • Player",
+       image: p.image,
+       icon: User
+    }));
+
+  const otherResults = [
     { type: "team", label: "Chennai Super Kings", sub: "IPL Franchise", icon: Trophy },
     { type: "team", label: "Lahore Qalandars", sub: "PSL Franchise", icon: Trophy },
     { type: "league", label: "PSL 2026", sub: "Pakistan Super League", icon: Calendar },
     { type: "league", label: "IPL 2026", sub: "Indian Premier League", icon: Calendar },
   ].filter(item => item.label.toLowerCase().includes(searchQuery.toLowerCase()));
+
+  const searchResults = [...playerResults, ...otherResults];
 
   return (
     <header className="h-16 flex items-center justify-between px-4 md:px-8 border-b border-border/40 bg-background/50 backdrop-blur-md sticky top-0 z-50">
@@ -68,8 +80,12 @@ export function Header() {
                         className="flex items-center justify-between p-3 rounded-lg hover:bg-white/10 transition-colors"
                       >
                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center border border-border">
-                               <result.icon className="w-4 h-4 text-electric-blue" />
+                            <div className="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center border border-border overflow-hidden">
+                               {result.image ? (
+                                  <img src={result.image} alt={result.label} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                               ) : (
+                                  <result.icon className="w-4 h-4 text-electric-blue" />
+                               )}
                             </div>
                             <div>
                                <div className="text-sm font-bold text-white">{result.label}</div>
@@ -133,8 +149,12 @@ export function Header() {
                         className="flex items-center justify-between p-3 rounded-xl bg-card border border-border"
                       >
                          <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center border border-border">
-                               <result.icon className="w-5 h-5 text-primary" />
+                            <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center border border-border overflow-hidden">
+                               {result.image ? (
+                                  <img src={result.image} alt={result.label} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                               ) : (
+                                  <result.icon className="w-5 h-5 text-primary" />
+                               )}
                             </div>
                             <div>
                                <div className="text-sm font-bold text-white">{result.label}</div>
